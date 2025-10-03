@@ -32,6 +32,13 @@ typedef struct
  \
 } while (0)
 
+inline void Vector_destroy(void* v)
+{
+    // TODO: Free elements individually? Would require dtor func.
+    if (v) free(CHDS_Vector_header(v));
+}
+
+// TODO: Private methods. Could be hidden by actually turning into lib rather than header only.
 inline void CHDS_Vector_set_capacity(CHDS_VectorHeader** h, size_t capacity, size_t element_size)
 {
     size_t size = sizeof(CHDS_VectorHeader) + capacity * element_size;
@@ -75,12 +82,5 @@ inline void CHDS_Vector_grow_if_needed(void** v, size_t element_size)
     // Set the input array to the new ptr.
     *v = h + 1;
 }
-
-inline void Vector_destroy(void* v)
-{
-    // TODO: Free elements individually? Would require dtor func.
-    if (v) free(CHDS_Vector_header(v));
-}
-
 
 #endif
