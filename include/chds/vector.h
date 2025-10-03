@@ -94,7 +94,7 @@ inline void CHDS_Vector_grow_if_needed(void** v, size_t element_size)
         if (h->count < h->capacity) return;
 
         // Determine how much to grow the vector by.
-        size_t extra = (h->capacity * CHDS_VECTOR_GROWTH_FACTOR);
+        size_t extra = (size_t)(h->capacity * CHDS_VECTOR_GROWTH_FACTOR);
         if (extra == 0) extra = 1;
 
         capacity = h->capacity + extra;
