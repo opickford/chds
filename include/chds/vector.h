@@ -32,6 +32,7 @@ typedef struct
  \
 } while (0)
 
+// Releases the underlying vector array.
 inline void Vector_destroy(void* v)
 {
     // TODO: Free elements individually? Would require dtor func.
