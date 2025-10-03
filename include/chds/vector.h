@@ -25,6 +25,9 @@ typedef struct
 // Return the number of elements in the vector.
 #define Vector_size(v) (v ? CHDS_Vector_header((v))->count : 0)
 
+// Return the number of elements the vector has allocated memory for.
+#define Vector_capacity(v) (v ? CHDS_Vector_header((v))->capacity : 0)
+
 // Add a value to the vector.
 #define Vector_push_back(v, value) do \
 { \
