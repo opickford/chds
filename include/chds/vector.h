@@ -32,6 +32,22 @@ typedef struct
  \
 } while (0)
 
+inline void CHDS_Vector_set_capacity(CHDS_VectorHeader** h, size_t capacity, size_t element_size)
+{
+    size_t size = sizeof(CHDS_VectorHeader) + capacity * element_size;
+
+    // TODO: Rename from temp.
+    CHDS_VectorHeader* temp = realloc(*h, size);
+    if (!temp)
+    {
+        // TODO: How can we possibly handle failure?
+        return;
+    }
+
+    *h = temp;
+    (*h)->capacity = capacity;
+}
+
 inline void CHDS_Vector_grow_if_needed(void** v, size_t element_size)
 {
     CHDS_VectorHeader* h = 0;
@@ -51,21 +67,13 @@ inline void CHDS_Vector_grow_if_needed(void** v, size_t element_size)
         count = h->count;
     }
     
-    size_t size = sizeof(CHDS_VectorHeader) + capacity * element_size;
+    CHDS_Vector_set_capacity(&h, capacity, element_size);
+    
+    // TODO: A bit annoying setting the count here, would be nice to not do this!
+    h->count = count;
 
-    // TODO: Rename from temp.
-    CHDS_VectorHeader* temp = realloc(h, size);
-    if (!temp)
-    {
-        // TODO: How can we possibly handle failure?
-        return;
-    }
-
-    CHDS_VectorHeader* new_header = temp;
-    new_header->capacity = capacity;
-    new_header->count = count;
-
-    *v = new_header + 1;
+    // Set the input array to the new ptr.
+    *v = h + 1;
 }
 
 inline void Vector_destroy(void* v)
