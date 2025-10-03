@@ -4,7 +4,7 @@
 
 #include <assert.h>
 
-static void test_vector_push_back()
+static void test_push_back()
 {
     Vector(int) v = 0;
 
@@ -20,7 +20,26 @@ static void test_vector_push_back()
     Vector_destroy(v);
 }
 
+static void test_reserve()
+{
+    const int CAPACITY = 5;
+
+    Vector(int) v = 0;
+    Vector_reserve(v, CAPACITY);
+
+    {
+        CHDS_VectorHeader* h = CHDS_Vector_header(v);
+        assert(h);
+        assert(h->capacity == CAPACITY);
+    }
+    
+    assert(Vector_size(v) == 0);
+
+    Vector_destroy(v);
+}
+
 void test_vector()
 {
-    test_vector_push_back();
+    test_push_back();
+    test_reserve();
 }
