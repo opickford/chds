@@ -2,16 +2,18 @@
 
 project (chds VERSION 0.0.1 LANGUAGES C)
 
-add_library(chds INTERFACE)
-
-target_include_directories(chds INTERFACE
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:include>
+add_library(chds 
+    INTERFACE
+        # Add headers so they appear in Visual Studio
+        "include/chds/vector.h"
 )
 
-# Add headers so they appear in Visual Studio
-target_sources(chds INTERFACE
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/chds/vector.h
+add_library(chds::chds ALIAS chds)
+
+target_include_directories(chds 
+    INTERFACE
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:include>
 )
 
 option(CHDS_BUILD_EXAMPLES "Build examples" ON)
@@ -26,9 +28,8 @@ if (CHDS_BUILD_TESTS)
     add_subdirectory(tests)
 endif()
 
-# Optional install support
-#if(CHDS_INSTALL)
-#    include(cmake/install.cmake)
-#endif()
+if(CHDS_INSTALL)
+    include(cmake/install.cmake)
+endif()
 
 set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT "example")
