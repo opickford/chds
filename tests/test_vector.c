@@ -4,6 +4,19 @@
 
 #include <assert.h>
 
+static void test_size()
+{
+    Vector(int) v = 0;
+
+    assert(Vector_size(v) == 0);
+
+    Vector_push_back(v, 1);
+    assert(Vector_size(v) == 1);
+
+    Vector_push_back(v, 2);
+    assert(Vector_size(v) == 2);
+}
+
 static void test_push_back()
 {
     Vector(int) v = 0;
@@ -20,6 +33,8 @@ static void test_push_back()
     Vector_destroy(v);
 }
 
+#include <stdio.h>
+
 static void test_reserve()
 {
     const int CAPACITY = 5;
@@ -32,7 +47,7 @@ static void test_reserve()
         assert(h);
         assert(h->capacity == CAPACITY);
     }
-    
+
     assert(Vector_size(v) == 0);
 
     Vector_destroy(v);
@@ -40,6 +55,7 @@ static void test_reserve()
 
 void test_vector()
 {
+    test_size();
     test_push_back();
     test_reserve();
 }

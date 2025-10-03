@@ -13,6 +13,8 @@ typedef struct
 
 } CHDS_VectorHeader;
 
+// TODO: tests for all functionality.
+
 // Define a vector type.
 #define Vector(T) T*
 
@@ -21,7 +23,7 @@ typedef struct
 #define CHDS_Vector_header(v) ((CHDS_VectorHeader*)(v) - 1)
 
 // Return the number of elements in the vector.
-#define Vector_size(v) CHDS_Vector_header((v))->count
+#define Vector_size(v) (v ? CHDS_Vector_header((v))->count : 0)
 
 // Add a value to the vector.
 #define Vector_push_back(v, value) do \
