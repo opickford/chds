@@ -15,17 +15,16 @@ target_sources(chds INTERFACE
 )
 
 option(CHDS_BUILD_EXAMPLES "Build examples" ON)
-#option(CHDS_BUILD_TESTS "Build tests" OFF) # TODO: Tests.
+option(CHDS_BUILD_TESTS "Build tests" ON)
 option(CHDS_INSTALL "Enable installation" ON)
 
 if (CHDS_BUILD_EXAMPLES)
     add_subdirectory(examples)
 endif()
 
-# TODO:
-#if (CHDS_BUILD_TEST)
-    #add_subdirectory(tests)
-#endif()
+if (CHDS_BUILD_TESTS)
+    add_subdirectory(tests)
+endif()
 
 # Optional install support
 #if(CHDS_INSTALL)
