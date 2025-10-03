@@ -33,8 +33,6 @@ static void test_push_back()
     Vector_destroy(v);
 }
 
-#include <stdio.h>
-
 static void test_reserve()
 {
     const int CAPACITY = 5;
@@ -56,6 +54,7 @@ static void test_reserve()
 void test_vector()
 {
     test_size();
+    // TODO: test_capacity()?
     test_push_back();
     test_reserve();
 }
