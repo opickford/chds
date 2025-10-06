@@ -51,10 +51,26 @@ static void test_reserve()
     Vector_destroy(v);
 }
 
+static void test_clear()
+{
+    Vector(int) v = 0;
+
+    Vector_push_back(v, 1);
+    Vector_push_back(v, 2);
+    Vector_push_back(v, 3);
+
+    assert(Vector_size(v) == 3);
+
+    Vector_clear(v);
+    assert(Vector_size(v) == 0);
+    assert(Vector_capacity(v) > 0);
+}
+
 void test_vector()
 {
     test_size();
     // TODO: test_capacity()?
     test_push_back();
     test_reserve();
+    test_clear();
 }
