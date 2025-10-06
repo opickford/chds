@@ -23,6 +23,8 @@ typedef struct
 
 // TODO: tests for all functionality.
 
+// TODO: Proper commenting of everything.
+
 // Define a vector type.
 #define Vector(T) T*
 
@@ -47,6 +49,10 @@ typedef struct
 // Increases the capacity of the vector to hold the given number of elements.
 // Note, this will not shrink the vector.
 #define Vector_reserve(v, capacity) CHDS_Vector_reserve(&(v), capacity, sizeof(*v))
+
+// Sets the capacity of the vector.
+// Note, this can shrink the vector.
+#define Vector_resize(v, capacity) CHDS_Vector_resize(&(v), capacity, sizeof(*v))
 
 // Clears the vector, afterwards, size == 0. 
 #define Vector_clear(v) if (v) { CHDS_Vector_header((v))->size = 0; }
@@ -96,6 +102,19 @@ inline void CHDS_Vector_reserve(void** v, size_t capacity, size_t element_size)
 
         // Reserve should not shrink the vector.
         if (capacity <= h->capacity) return;
+    }
+
+    h = CHDS_Vector_set_capacity(h, capacity, element_size);
+
+    *v = h + 1;
+}
+
+inline void CHDS_Vector_resize(void** v, size_t capacity, size_t element_size)
+{
+    CHDS_VectorHeader* h = 0;
+    if (*v)
+    {
+        h = CHDS_Vector_header(*v);
     }
 
     h = CHDS_Vector_set_capacity(h, capacity, element_size);
