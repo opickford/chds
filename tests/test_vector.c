@@ -46,6 +46,15 @@ static void test_reserve()
         assert(h->capacity == CAPACITY);
     }
 
+    // Attempt to reserve less elements, this should not
+    // shrink the vector.
+    Vector_reserve(v, 3);
+    {
+        CHDS_VectorHeader* h = CHDS_Vector_header(v);
+        assert(h);
+        assert(h->capacity == CAPACITY);
+    }
+
     assert(Vector_size(v) == 0);
 
     Vector_destroy(v);

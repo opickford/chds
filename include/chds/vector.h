@@ -45,6 +45,7 @@ typedef struct
 } while (0)
 
 // Increases the capacity of the vector to hold the given number of elements.
+// Note, this will not shrink the vector.
 #define Vector_reserve(v, capacity) CHDS_Vector_reserve(&(v), capacity, sizeof(*v))
 
 // Clears the vector, afterwards, size == 0. 
@@ -65,6 +66,8 @@ inline CHDS_VectorHeader* CHDS_Vector_set_capacity(CHDS_VectorHeader* h, size_t 
     if (h)
     {
         count = h->size;
+
+        if (capacity == h->capacity) return h;
     }
 
     size_t size = sizeof(CHDS_VectorHeader) + capacity * element_size;
@@ -90,6 +93,9 @@ inline void CHDS_Vector_reserve(void** v, size_t capacity, size_t element_size)
     if (*v)
     {
         h = CHDS_Vector_header(*v);
+
+        // Reserve should not shrink the vector.
+        if (capacity <= h->capacity) return;
     }
 
     h = CHDS_Vector_set_capacity(h, capacity, element_size);
