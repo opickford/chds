@@ -16,8 +16,8 @@
 
 typedef struct
 {
-    size_t count;
-    size_t capacity;
+    size_t size;         // Number of elements stored in the vector.
+    size_t capacity;     // Number of elements the vector can store.
 
 } CHDS_VectorHeader;
 
@@ -31,7 +31,7 @@ typedef struct
 #define CHDS_Vector_header(v) ((CHDS_VectorHeader*)(v) - 1)
 
 // Return the number of elements in the vector.
-#define Vector_size(v) (v ? CHDS_Vector_header((v))->count : 0)
+#define Vector_size(v) (v ? CHDS_Vector_header((v))->size : 0)
 
 // Return the number of elements the vector has allocated memory for.
 #define Vector_capacity(v) (v ? CHDS_Vector_header((v))->capacity : 0)
@@ -40,7 +40,7 @@ typedef struct
 #define Vector_push_back(v, value) do \
 { \
     CHDS_Vector_grow_if_needed(&(v), sizeof(*v)); \
-    (v)[CHDS_Vector_header((v))->count++] = (value); \
+    (v)[CHDS_Vector_header((v))->size++] = (value); \
 \
 } while (0)
 
@@ -48,7 +48,7 @@ typedef struct
 #define Vector_reserve(v, capacity) CHDS_Vector_reserve(&(v), capacity, sizeof(*v))
 
 // Clears the vector, afterwards, size == 0. 
-#define Vector_clear(v) if (v) { CHDS_Vector_header((v))->count = 0; }
+#define Vector_clear(v) if (v) { CHDS_Vector_header((v))->size = 0; }
 
 // Releases the underlying vector array.
 inline void Vector_destroy(void* v)
@@ -64,7 +64,7 @@ inline CHDS_VectorHeader* CHDS_Vector_set_capacity(CHDS_VectorHeader* h, size_t 
     size_t count = 0;
     if (h)
     {
-        count = h->count;
+        count = h->size;
     }
 
     size_t size = sizeof(CHDS_VectorHeader) + capacity * element_size;
@@ -79,7 +79,7 @@ inline CHDS_VectorHeader* CHDS_Vector_set_capacity(CHDS_VectorHeader* h, size_t 
 
     // Set output header.
     vector->capacity = capacity;
-    vector->count = count;
+    vector->size = count;
 
     return vector;
 }
@@ -105,7 +105,7 @@ inline void CHDS_Vector_grow_if_needed(void** v, size_t element_size)
     if (*v)
     {
         h = CHDS_Vector_header(*v);
-        if (h->count < h->capacity) return;
+        if (h->size < h->capacity) return;
 
         // Determine how much to grow the vector by.
         size_t extra = (size_t)(h->capacity * CHDS_VECTOR_GROWTH_FACTOR);
