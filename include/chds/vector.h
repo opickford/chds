@@ -12,6 +12,8 @@
 
 // TODO: Should we name stuff Vec to save typing?? Vector is kinda unnecessary.
 
+// TODO: I feel like we should be handling if CHDS_Vector_header returns 0?
+
 typedef struct
 {
     size_t count;
@@ -44,6 +46,8 @@ typedef struct
 
 // Increases the capacity of the vector to hold the given number of elements.
 #define Vector_reserve(v, capacity) CHDS_Vector_reserve(&(v), capacity, sizeof(*v))
+
+#define Vector_clear(v) if (v) CHDS_Vector_header((v))->size = 0;
 
 // Releases the underlying vector array.
 inline void Vector_destroy(void* v)
