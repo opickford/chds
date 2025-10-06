@@ -119,6 +119,9 @@ inline void CHDS_Vector_resize(void** v, size_t capacity, size_t element_size)
 
     h = CHDS_Vector_set_capacity(h, capacity, element_size);
 
+    // Ensure the previous size does not exceed the new capacity.
+    if (h->size > h->capacity) h->size = h->capacity;
+
     *v = h + 1;
 }
 
