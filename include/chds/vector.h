@@ -10,6 +10,8 @@
 //       be clearer. Using a struct will introduce one pointer indirection, however, that is obviously a minimal issue. For now I think this is fine?
 //       however in my code i normally just write a pointer to the void* array like int* data = vec.data;
 
+// TODO: Should we name stuff Vec to save typing?? Vector is kinda unnecessary.
+
 typedef struct
 {
     size_t count;
