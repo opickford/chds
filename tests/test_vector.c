@@ -46,16 +46,35 @@ static void test_reserve()
         assert(h->capacity == CAPACITY);
     }
 
-    // Attempt to reserve less elements, this should not
-    // shrink the vector.
+    // Attempt to reserve less elements, this should not shrink the vector.
     Vector_reserve(v, 3);
-    {
-        CHDS_VectorHeader* h = CHDS_Vector_header(v);
-        assert(h);
-        assert(h->capacity == CAPACITY);
-    }
+    assert(Vector_capacity(v) == CAPACITY);
 
     assert(Vector_size(v) == 0);
+
+    Vector_destroy(v);
+}
+
+static void test_resize()
+{
+    const int CAPACITY = 5;
+
+    Vector(int) v = 0;
+    Vector_resize(v, CAPACITY);
+
+    for (int i = 0; i < CAPACITY; ++i)
+    {
+        Vector_push_back(v, i);
+    }
+
+    assert(Vector_size(v) == CAPACITY);
+    assert(Vector_capacity(v) == CAPACITY);
+    
+    // Resize to less than current capacity, this should shrink the vector
+    // and also reduce the size to the capacity.
+    Vector_resize(v, 3);
+    assert(Vector_capacity(v) == 3);
+    assert(Vector_size(v) == 3);
 
     Vector_destroy(v);
 }
@@ -81,5 +100,6 @@ void test_vector()
     // TODO: test_capacity()?
     test_push_back();
     test_reserve();
+    test_resize();
     test_clear();
 }
