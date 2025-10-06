@@ -47,6 +47,7 @@ typedef struct
 // Increases the capacity of the vector to hold the given number of elements.
 #define Vector_reserve(v, capacity) CHDS_Vector_reserve(&(v), capacity, sizeof(*v))
 
+// Clears the vector, afterwards, size == 0. 
 #define Vector_clear(v) if (v) { CHDS_Vector_header((v))->count = 0; }
 
 // Releases the underlying vector array.
