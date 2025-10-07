@@ -8,6 +8,8 @@
 #define CHDS_VEC_GROWTH_FACTOR 1.5f
 #endif
 
+// TODO: In the future could add some macro to remove make #define to remove the lib prefix.
+
 // TODO: Is it nicer to just use a struct and void*? the only issue is losing the type information. but everything else would potentially
 //       be clearer. Using a struct will introduce one pointer indirection, however, that is obviously a minimal issue. For now I think this is fine?
 //       however in my code i normally just write a pointer to the void* array like int* data = vec.data;
