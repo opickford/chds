@@ -1,4 +1,4 @@
-﻿#include <chds/vector.h>
+﻿#include <chds/vec.h>
 
 #include <stdio.h>
 
@@ -6,12 +6,12 @@ int main()
 {
     const int N = 100;
 
-    Vector(int) v = 0;
-    Vector_reserve(v, N);
+    chds_vec(int) v = 0;
+    chds_vec_reserve(v, N);
 
     for (int i = 0; i < N; ++i)
     {
-        Vector_push_back(v, i);
+        chds_vec_push_back(v, i);
     }
 
     for (int i = 0; i < N; ++i)
@@ -19,9 +19,10 @@ int main()
         printf("%d) %d\n", i, v[i]);
     }
 
-    printf("Size: %zu\n", Vector_size(v));
+    printf("Size: %zu\n", chds_vec_size(v));
+    printf("Capacity: %zu\n", chds_vec_capacity(v));
 
-    Vector_destroy(v);
+    chds_vec_destroy(v);
 
     return 0;
 }

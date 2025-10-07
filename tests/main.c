@@ -1,10 +1,10 @@
-#include "test_vector.h"
+#include "test_vec.h"
 
 #include <stdio.h>
 
 int main()
 {
-    test_vector();
+    test_vec();
 
     return 0;
 }
