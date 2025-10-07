@@ -5,7 +5,7 @@ project (chds VERSION 0.0.1 LANGUAGES C)
 add_library(chds 
     INTERFACE
         # Add headers so they appear in Visual Studio
-        "include/chds/vector.h"
+        "include/chds/vec.h"
 )
 
 add_library(chds::chds ALIAS chds)
