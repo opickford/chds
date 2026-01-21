@@ -28,7 +28,6 @@ typedef struct
 // TODO: Proper commenting of everything.
 
 // Define a chds_vec type.
-// TODO: Rename chds_vec_t?
 #define CHDS_VEC(T) T*
 
 // TODO: Make private.
