@@ -21,53 +21,54 @@ typedef struct
     size_t size;         // Number of elements stored in the chds_vec.
     size_t capacity;     // Number of elements the chds_vec can store.
 
-} chds_vec_header_t;
+} chds_vec_header;
 
 // TODO: tests for all functionality.
 
 // TODO: Proper commenting of everything.
 
 // Define a chds_vec type.
-#define chds_vec(T) T*
+// TODO: Rename chds_vec_t?
+#define CHDS_VEC(T) T*
 
 // TODO: Make private.
 // Return the vector header.
-#define chds_vec_header(v) ((chds_vec_header_t*)(v) - 1)
+#define CHDS_VEC_HEADER(v) ((chds_vec_header*)(v) - 1)
 
 // Return the number of elements in the vector.
-#define chds_vec_size(v) (v ? chds_vec_header((v))->size : 0)
+#define CHDS_VEC_SIZE(v) (v ? CHDS_VEC_HEADER((v))->size : 0)
 
 // Return the number of elements the vector has allocated memory for.
-#define chds_vec_capacity(v) (v ? chds_vec_header((v))->capacity : 0)
+#define CHDS_VEC_CAPACITY(v) (v ? CHDS_VEC_HEADER((v))->capacity : 0)
 
 // Add a value to the vector.
-#define chds_vec_push_back(v, value) do \
+#define CHDS_VEC_PUSH_BACK(v, value) do \
 { \
     chds_vec__grow_if_needed(&(v), sizeof(*v)); \
-    (v)[chds_vec_header((v))->size++] = (value); \
+    (v)[CHDS_VEC_HEADER((v))->size++] = (value); \
 \
 } while (0)
 
 // Increases the capacity of the chds_vec to hold the given number of elements.
 // Note, this will not shrink the chds_vec.
-#define chds_vec_reserve(v, capacity) chds_vec__reserve(&(v), capacity, sizeof(*v))
+#define CHDS_VEC_RESERVE(v, capacity) chds_vec__reserve(&(v), capacity, sizeof(*v))
 
 // Sets the capacity of the vector.
 // Note, this can shrink the vector.
-#define chds_vec_resize(v, capacity) chds_vec__resize(&(v), capacity, sizeof(*v))
+#define CHDS_VEC_RESIZE(v, capacity) chds_vec__resize(&(v), capacity, sizeof(*v))
 
 // Clears the vector, afterwards, size == 0. 
-#define chds_vec_clear(v) if (v) { chds_vec_header((v))->size = 0; }
+#define CHDS_VEC_CLEAR(v) if (v) { CHDS_VEC_HEADER((v))->size = 0; }
 
 // Releases the underlying vector array.
 inline void chds_vec_destroy(void* v)
 {
     // TODO: Free elements individually? Would require dtor func.
-    if (v) free(chds_vec_header(v));
+    if (v) free(CHDS_VEC_HEADER(v));
 }
 
 // TODO: Private methods. Could be hidden by actually turning into lib rather than header only.
-inline chds_vec_header_t* chds_vec__set_capacity(chds_vec_header_t* h, size_t capacity, size_t element_size)
+inline chds_vec_header* chds_vec__set_capacity(chds_vec_header* h, size_t capacity, size_t element_size)
 {
     // Copy old header data.
     size_t count = 0;
@@ -78,9 +79,9 @@ inline chds_vec_header_t* chds_vec__set_capacity(chds_vec_header_t* h, size_t ca
         if (capacity == h->capacity) return h;
     }
 
-    size_t size = sizeof(chds_vec_header_t) + capacity * element_size;
+    size_t size = sizeof(chds_vec_header) + capacity * element_size;
 
-    chds_vec_header_t* chds_vec = realloc(h, size);
+    chds_vec_header* chds_vec = realloc(h, size);
     if (!chds_vec)
     {
         // TODO: How can we possibly handle failure?
@@ -97,10 +98,10 @@ inline chds_vec_header_t* chds_vec__set_capacity(chds_vec_header_t* h, size_t ca
 
 inline void chds_vec__reserve(void** v, size_t capacity, size_t element_size)
 {
-    chds_vec_header_t* h = 0;
+    chds_vec_header* h = 0;
     if (*v)
     {
-        h = chds_vec_header(*v);
+        h = CHDS_VEC_HEADER(*v);
 
         // Reserve should not shrink the chds_vec.
         if (capacity <= h->capacity) return;
@@ -113,10 +114,10 @@ inline void chds_vec__reserve(void** v, size_t capacity, size_t element_size)
 
 inline void chds_vec__resize(void** v, size_t capacity, size_t element_size)
 {
-    chds_vec_header_t* h = 0;
+    chds_vec_header* h = 0;
     if (*v)
     {
-        h = chds_vec_header(*v);
+        h = CHDS_VEC_HEADER(*v);
     }
 
     h = chds_vec__set_capacity(h, capacity, element_size);
@@ -129,12 +130,12 @@ inline void chds_vec__resize(void** v, size_t capacity, size_t element_size)
 
 inline void chds_vec__grow_if_needed(void** v, size_t element_size)
 {
-    chds_vec_header_t* h = 0;
+    chds_vec_header* h = 0;
     size_t capacity = 1;
 
     if (*v)
     {
-        h = chds_vec_header(*v);
+        h = CHDS_VEC_HEADER(*v);
         if (h->size < h->capacity) return;
 
         // Determine how much to grow the chds_vec by.
