@@ -35,7 +35,7 @@ typedef struct
 // Returns a pointer to the vector's header.
 #define chds_vec__header(v) ((CHDS_VecHeader*)(v) - 1)
 
-inline static CHDS_Result chds_vec__set_capacity(CHDS_VecHeader* h, size_t capacity, size_t element_size);
+inline static CHDS_Result chds_vec__set_capacity(CHDS_VecHeader** h, size_t capacity, size_t element_size);
 inline static CHDS_Result chds_vec__reserve(void** v, size_t capacity, size_t element_size);
 inline static CHDS_Result chds_vec__resize(void** v, size_t capacity, size_t element_size);
 inline static CHDS_Result chds_vec__grow_if_needed(void** v, size_t element_size);
