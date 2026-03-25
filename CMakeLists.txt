@@ -6,6 +6,7 @@ add_library(chds
     INTERFACE
         # Add headers so they appear in Visual Studio
         "include/chds/vec.h"
+		"include/chds/chds.h"
 )
 
 add_library(chds::chds ALIAS chds)
