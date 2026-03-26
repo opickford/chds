@@ -2,6 +2,10 @@
 
 project (chds VERSION 0.0.1 LANGUAGES C)
 
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_C_EXTENSIONS OFF)
+
 configure_file(
 	cmake/version.h.in
 	${CMAKE_CURRENT_BINARY_DIR}/include/chds/version.h
