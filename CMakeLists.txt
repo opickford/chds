@@ -36,6 +36,7 @@ if (CHDS_BUILD_EXAMPLES)
 endif()
 
 if (CHDS_BUILD_TESTS)
+    enable_testing()
     add_subdirectory(tests)
 endif()
 
