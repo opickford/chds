@@ -104,7 +104,11 @@ See the [examples](examples/) directory for more.
 
 ## Running tests
 
-TODO
+```bash
+cmake -S . -B build -DCHDS_BUILD_TESTS=ON
+cmake --build build --config Release
+ctest -C Release --test-dir build --output-on-failure
+```
 
 ---
 
