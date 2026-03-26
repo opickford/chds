@@ -1,5 +1,3 @@
-#include "test_vec.h"
-
 #include <chds/vec.h>
 
 #include <assert.h>
@@ -94,7 +92,7 @@ static void test_clear()
     assert(chds_vec_capacity(v) > 0);
 }
 
-void test_vec()
+int main()
 {
     test_size();
     // TODO: test_capacity()?

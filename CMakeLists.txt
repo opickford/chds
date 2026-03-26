@@ -1,4 +1,4 @@
-﻿cmake_minimum_required(VERSION 4.3)
+﻿cmake_minimum_required(VERSION 3.31)
 
 project (chds VERSION 0.0.1 LANGUAGES C)
 
@@ -36,6 +36,7 @@ if (CHDS_BUILD_EXAMPLES)
 endif()
 
 if (CHDS_BUILD_TESTS)
+    enable_testing()
     add_subdirectory(tests)
 endif()
 
