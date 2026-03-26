@@ -221,4 +221,26 @@ inline static CHDS_Result chds_vec__grow_if_needed(void** v, size_t element_size
     return CHDS_OK;
 }
 
+/**
+*
+* OPTIONAL - Unprefixed API
+*
+*   #define CHDS_NO_PREFIX
+*   #include <chds/vec.h>
+*
+*/
+#ifdef CHDS_NO_PREFIX
+
+#define Vec(T)                      CHDS_Vec(T)
+#define vec_size(v)                 chds_vec_size(v)
+#define vec_capacity(v)             chds_vec_capacity(v)
+#define vec_push(v, value)          chds_vec_push(v, value)
+#define vec_reserve(v, capacity)    chds_vec_reserve(v, capacity)
+#define vec_resize(v, capacity)     chds_vec_resize(v, capacity)
+#define vec_clear(v)                chds_vec_clear(v)
+#define vec_empty(v)                chds_vec_empty(v)
+
+#endif
+
+
 #endif
