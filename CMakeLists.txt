@@ -1,6 +1,11 @@
-﻿cmake_minimum_required(VERSION 3.8)
+﻿cmake_minimum_required(VERSION 4.3)
 
 project (chds VERSION 0.0.1 LANGUAGES C)
+
+configure_file(
+	cmake/version.h.in
+	${CMAKE_CURRENT_BINARY_DIR}/include/chds/version.h
+)
 
 add_library(chds 
     INTERFACE
@@ -14,6 +19,7 @@ add_library(chds::chds ALIAS chds)
 target_include_directories(chds 
     INTERFACE
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+		$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
         $<INSTALL_INTERFACE:include>
 )
 
