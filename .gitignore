@@ -1,4 +1,7 @@
-.vs
-out
-build
-install
+.vs/
+.vscode/
+
+out/
+build/
+install/
+
