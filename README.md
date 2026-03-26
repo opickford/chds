@@ -2,7 +2,8 @@
 
 A personal C Header-only Data Structures library.
 
-TODO: stickers
+[![Windows Release CI](https://github.com/opickford/chds/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/opickford/chds/actions/workflows/ci.yml)
+# TODO: licence etc.
 
 ---
 
