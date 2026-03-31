@@ -72,7 +72,7 @@ PUBLIC API
 * 
 * Push a value into the back of the vector.
 * 
-* @param v The vector. Must not be NULL.
+* @param v The vector.
 * @param value The value to push.
 * 
 * @return CHDS_OK on success, CHDS_ERR_ALLOC on allocation failure.
