@@ -80,7 +80,7 @@ static void test_reserve()
     }
 
     // Attempt to reserve less elements, this should not shrink the chds_vec.
-    chds_vec_reserve(v, 3);
+    CHDS_ASSERT(chds_vec_reserve(v, 3) == CHDS_OK);
     CHDS_ASSERT(chds_vec_capacity(v) == CAPACITY);
 
     CHDS_ASSERT(chds_vec_size(v) == 0);
@@ -94,7 +94,7 @@ static void test_resize()
     const int CAPACITY = 5;
 
     CHDS_Vec(int) v = 0;
-    chds_vec_resize(v, CAPACITY);
+    CHDS_ASSERT(chds_vec_resize(v, CAPACITY) == CHDS_OK);
 
     for (int i = 0; i < CAPACITY; ++i)
     {
@@ -141,6 +141,7 @@ static void test_null()
     // Should not throw an error.
     chds_vec_clear(v); 
     chds_vec_destroy(v);
+    CHDS_ASSERT(v == 0);
 
     // The rest of the functions are tested from null in the other tests.
 }
