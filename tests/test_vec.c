@@ -73,11 +73,7 @@ static void test_reserve()
     CHDS_Vec(int) v = 0;
     CHDS_ASSERT(CHDS_OK == chds_vec_reserve(v, CAPACITY));
 
-    {
-        CHDS_VecHeader* h = chds_vec__header(v);
-        CHDS_ASSERT(h);
-        CHDS_ASSERT(h->capacity == CAPACITY);
-    }
+    CHDS_ASSERT(chds_vec_capacity(v) == CAPACITY);
 
     // Attempt to reserve less elements, this should not shrink the chds_vec.
     CHDS_ASSERT(chds_vec_reserve(v, 3) == CHDS_OK);
