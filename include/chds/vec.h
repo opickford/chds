@@ -253,6 +253,7 @@ inline static CHDS_Result chds_vec__grow_if_needed(void** v, size_t element_size
 #define vec_size(v)                 chds_vec_size(v)
 #define vec_capacity(v)             chds_vec_capacity(v)
 #define vec_push(v, value)          chds_vec_push(v, value)
+#define vec_pop(v)                  chds_vec_pop(v)
 #define vec_reserve(v, capacity)    chds_vec_reserve(v, capacity)
 #define vec_resize(v, capacity)     chds_vec_resize(v, capacity)
 #define vec_clear(v)                chds_vec_clear(v)
