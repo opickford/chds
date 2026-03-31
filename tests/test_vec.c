@@ -48,15 +48,15 @@ static void test_pop()
     chds_vec_push(v, 1);
     chds_vec_push(v, 2);
 
-    assert(chds_vec_size(v) == 2);
+    CHDS_ASSERT(chds_vec_size(v) == 2);
 
     chds_vec_pop(v);
 
-    assert(chds_vec_size(v) == 1);
+    CHDS_ASSERT(chds_vec_size(v) == 1);
 
     chds_vec_pop(v);
 
-    assert(chds_vec_size(v) == 0);
+    CHDS_ASSERT(chds_vec_size(v) == 0);
 
     chds_vec_destroy(v);
 }
