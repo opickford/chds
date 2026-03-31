@@ -18,10 +18,10 @@ static void test_size()
 
     CHDS_ASSERT(chds_vec_size(v) == 0);
 
-    chds_vec_push(v, 1);
+    CHDS_ASSERT(chds_vec_push(v, 1) == CHDS_OK);
     CHDS_ASSERT(chds_vec_size(v) == 1);
 
-    chds_vec_push(v, 2);
+    CHDS_ASSERT(chds_vec_push(v, 2) == CHDS_OK);
     CHDS_ASSERT(chds_vec_size(v) == 2);
 
     chds_vec_destroy(v);
@@ -32,9 +32,9 @@ static void test_push()
 {
     CHDS_Vec(int) v = 0;
 
-    chds_vec_push(v, 1);
-    chds_vec_push(v, 2);
-    chds_vec_push(v, 3);
+    CHDS_ASSERT(chds_vec_push(v, 1) == CHDS_OK);
+    CHDS_ASSERT(chds_vec_push(v, 2) == CHDS_OK);
+    CHDS_ASSERT(chds_vec_push(v, 3) == CHDS_OK);
 
     CHDS_ASSERT(v[0] == 1);
     CHDS_ASSERT(v[1] == 2);
@@ -49,8 +49,8 @@ static void test_pop()
 {
     CHDS_Vec(int) v = 0;
 
-    chds_vec_push(v, 1);
-    chds_vec_push(v, 2);
+    CHDS_ASSERT(chds_vec_push(v, 1) == CHDS_OK);
+    CHDS_ASSERT(chds_vec_push(v, 2) == CHDS_OK);
 
     CHDS_ASSERT(chds_vec_size(v) == 2);
 
@@ -71,7 +71,7 @@ static void test_reserve()
     const int CAPACITY = 5;
 
     CHDS_Vec(int) v = 0;
-    chds_vec_reserve(v, CAPACITY);
+    CHDS_ASSERT(CHDS_OK == chds_vec_reserve(v, CAPACITY));
 
     {
         CHDS_VecHeader* h = chds_vec__header(v);
@@ -98,7 +98,7 @@ static void test_resize()
 
     for (int i = 0; i < CAPACITY; ++i)
     {
-        chds_vec_push(v, i);
+        CHDS_ASSERT(chds_vec_push(v, i) == CHDS_OK);
     }
 
     CHDS_ASSERT(chds_vec_size(v) == CAPACITY);
@@ -106,7 +106,7 @@ static void test_resize()
     
     // Resize to less than current capacity, this should shrink the chds_vec
     // and also reduce the size to the capacity.
-    chds_vec_resize(v, 3);
+    CHDS_ASSERT(chds_vec_resize(v, 3) == CHDS_OK);
     CHDS_ASSERT(chds_vec_capacity(v) == 3);
     CHDS_ASSERT(chds_vec_size(v) == 3);
 
@@ -117,9 +117,9 @@ static void test_clear()
 {
     CHDS_Vec(int) v = 0;
 
-    chds_vec_push(v, 1);
-    chds_vec_push(v, 2);
-    chds_vec_push(v, 3);
+    CHDS_ASSERT(chds_vec_push(v, 1) == CHDS_OK);
+    CHDS_ASSERT(chds_vec_push(v, 2) == CHDS_OK);
+    CHDS_ASSERT(chds_vec_push(v, 3) == CHDS_OK);
 
     CHDS_ASSERT(chds_vec_size(v) == 3);
 
