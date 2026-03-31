@@ -2,8 +2,9 @@
 
 A personal C Header-only Data Structures library.
 
-[![Windows Release CI](https://github.com/opickford/chds/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/opickford/chds/actions/workflows/ci.yml)
-# TODO: licence etc.
+[![build](https://img.shields.io/github/actions/workflow/status/opickford/chds/ci.yml?style=for-the-badge&label=build)](https://github.com/opickford/chds/actions)
+[![license](https://img.shields.io/github/license/opickford/chds?style=for-the-badge)](LICENSE)
+[![version](https://img.shields.io/github/v/tag/opickford/chds?style=flat-square&label=version)](https://github.com/opickford/chds/tags)
 
 ---
 
@@ -31,7 +32,7 @@ A personal C Header-only Data Structures library.
 ## Requirements
 
 - C11 or later
-- CMake 4.3 or later
+- CMake 3.31 or later
 
 ---
 
@@ -132,8 +133,6 @@ This project follows [semantic versioning](https://semver.org). See [CHANGELOG.m
 
 ---
 
-## License
+## Licence
 
-TODO
-
-MIT — see [LICENSE](LICENSE) for details.
+This project is licensed under the [MIT License](LICENSE).
