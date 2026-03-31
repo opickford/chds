@@ -143,14 +143,18 @@ PUBLIC API
 
 /**
 * 
-* Releases the underlying vector array.
+* Releases the underlying vector array. Sets the vector to null.
 * 
 */
-inline void chds_vec_destroy(void* v)
-{
-    // TODO: Free elements individually? Would require dtor func.
-    if (v) free(chds_vec__header(v));
-}
+// TODO: Free elements individually? Would require dtor func.
+#define chds_vec_destroy(v) do \
+{ \
+    if ((v)) \
+    { \
+        free(chds_vec__header(v));          \
+        (v) = 0;                            \
+    } \
+} while(0)
 
 /*
 
