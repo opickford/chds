@@ -4,7 +4,7 @@ A personal C Header-only Data Structures library.
 
 [![build](https://img.shields.io/github/actions/workflow/status/opickford/chds/ci.yml?style=for-the-badge&label=build)](https://github.com/opickford/chds/actions)
 [![license](https://img.shields.io/github/license/opickford/chds?style=for-the-badge)](LICENSE)
-[![version](https://img.shields.io/github/v/tag/opickford/chds?style=flat-square&label=version)](https://github.com/opickford/chds/tags)
+[![version](https://img.shields.io/github/v/tag/opickford/chds?style=for-the-badge&label=version)](https://github.com/opickford/chds/tags)
 
 ---
 
