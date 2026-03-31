@@ -31,6 +31,26 @@ static void test_push()
     chds_vec_destroy(v);
 }
 
+static void test_pop()
+{
+    CHDS_Vec(int) v = 0;
+
+    chds_vec_push(v, 1);
+    chds_vec_push(v, 2);
+
+    assert(chds_vec_size(v) == 2);
+
+    chds_vec_pop(v);
+
+    assert(chds_vec_size(v) == 1);
+
+    chds_vec_pop(v);
+
+    assert(chds_vec_size(v) == 0);
+
+    chds_vec_destroy(v);
+}
+
 static void test_reserve()
 {
     const int CAPACITY = 5;
@@ -97,6 +117,7 @@ int main()
     test_size();
     // TODO: test_capacity()?
     test_push();
+    test_pop();
     test_reserve();
     test_resize();
     test_clear();

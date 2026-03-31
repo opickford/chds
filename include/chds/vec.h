@@ -261,5 +261,4 @@ inline static CHDS_Result chds_vec__grow_if_needed(void** v, size_t element_size
 
 #endif
 
-
 #endif
