@@ -78,12 +78,10 @@ PUBLIC API
 * @return CHDS_OK on success, CHDS_ERR_ALLOC on allocation failure.
 * 
 */
-#define chds_vec_push(v, value) do \
-{ \
-    chds_vec__grow_if_needed(&(v), sizeof(*v));                                \
-    (v)[chds_vec__header((v))->size++] = (value);                              \
-\
-} while (0)
+#define chds_vec_push(v, value) \
+    (chds_vec__grow_if_needed(&(v), sizeof(*(v))) == CHDS_OK ?     \
+        ((v)[chds_vec__header((v))->size++] = (value), CHDS_OK) : \
+        CHDS_ERR_ALLOC)
 
 /**
 * 
