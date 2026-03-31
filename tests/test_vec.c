@@ -1,18 +1,28 @@
 #include <chds/vec.h>
 
-#include <assert.h>
+#include <stdio.h>
+
+#define CHDS_ASSERT(expr) do \
+if (!(expr)) \
+{  \
+    fprintf(stderr, "Assertion failed: %s\n"    \
+                    "  in file %s, line %d\n",  \
+            #expr, __FILE__, __LINE__);         \
+    exit(1);                                    \
+} \
+while(0)
 
 static void test_size()
 {
     CHDS_Vec(int) v = 0;
 
-    assert(chds_vec_size(v) == 0);
+    CHDS_ASSERT(chds_vec_size(v) == 0);
 
     chds_vec_push(v, 1);
-    assert(chds_vec_size(v) == 1);
+    CHDS_ASSERT(chds_vec_size(v) == 1);
 
     chds_vec_push(v, 2);
-    assert(chds_vec_size(v) == 2);
+    CHDS_ASSERT(chds_vec_size(v) == 2);
 }
 
 static void test_push()
@@ -23,10 +33,10 @@ static void test_push()
     chds_vec_push(v, 2);
     chds_vec_push(v, 3);
 
-    assert(v[0] == 1);
-    assert(v[1] == 2);
-    assert(v[2] == 3);
-    assert(chds_vec_size(v) == 3);
+    CHDS_ASSERT(v[0] == 1);
+    CHDS_ASSERT(v[1] == 2);
+    CHDS_ASSERT(v[2] == 3);
+    CHDS_ASSERT(chds_vec_size(v) == 3);
 
     chds_vec_destroy(v);
 }
@@ -60,15 +70,15 @@ static void test_reserve()
 
     {
         CHDS_VecHeader* h = chds_vec__header(v);
-        assert(h);
-        assert(h->capacity == CAPACITY);
+        CHDS_ASSERT(h);
+        CHDS_ASSERT(h->capacity == CAPACITY);
     }
 
     // Attempt to reserve less elements, this should not shrink the chds_vec.
     chds_vec_reserve(v, 3);
-    assert(chds_vec_capacity(v) == CAPACITY);
+    CHDS_ASSERT(chds_vec_capacity(v) == CAPACITY);
 
-    assert(chds_vec_size(v) == 0);
+    CHDS_ASSERT(chds_vec_size(v) == 0);
 
     chds_vec_destroy(v);
 }
@@ -85,14 +95,14 @@ static void test_resize()
         chds_vec_push(v, i);
     }
 
-    assert(chds_vec_size(v) == CAPACITY);
-    assert(chds_vec_capacity(v) == CAPACITY);
+    CHDS_ASSERT(chds_vec_size(v) == CAPACITY);
+    CHDS_ASSERT(chds_vec_capacity(v) == CAPACITY);
     
     // Resize to less than current capacity, this should shrink the chds_vec
     // and also reduce the size to the capacity.
     chds_vec_resize(v, 3);
-    assert(chds_vec_capacity(v) == 3);
-    assert(chds_vec_size(v) == 3);
+    CHDS_ASSERT(chds_vec_capacity(v) == 3);
+    CHDS_ASSERT(chds_vec_size(v) == 3);
 
     chds_vec_destroy(v);
 }
@@ -105,11 +115,11 @@ static void test_clear()
     chds_vec_push(v, 2);
     chds_vec_push(v, 3);
 
-    assert(chds_vec_size(v) == 3);
+    CHDS_ASSERT(chds_vec_size(v) == 3);
 
     chds_vec_clear(v);
-    assert(chds_vec_size(v) == 0);
-    assert(chds_vec_capacity(v) > 0);
+    CHDS_ASSERT(chds_vec_size(v) == 0);
+    CHDS_ASSERT(chds_vec_capacity(v) > 0);
 }
 
 int main()
@@ -121,4 +131,6 @@ int main()
     test_reserve();
     test_resize();
     test_clear();
+
+    return 0;
 }
