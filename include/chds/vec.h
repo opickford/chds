@@ -124,10 +124,10 @@ PUBLIC API
 *
 * Sets the vector's size to 0.
 *
-* @param v The vector.
+* @param v The vector. Must not be NULL.
 *
 */
-#define chds_vec_clear(v) if ((v)) { chds_vec__header((v))->size = 0; }
+#define chds_vec_clear(v) chds_vec__header((v))->size = 0;
 
 /**
 *
