@@ -149,7 +149,11 @@ PUBLIC API
 inline void chds_vec_destroy(void* v)
 {
     // TODO: Free elements individually? Would require dtor func.
-    if (v) free(chds_vec__header(v));
+    if (v) 
+    {
+        free(chds_vec__header(v));
+        v = 0;
+    }
 }
 
 /*
