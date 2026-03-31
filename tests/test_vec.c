@@ -23,6 +23,9 @@ static void test_size()
 
     chds_vec_push(v, 2);
     CHDS_ASSERT(chds_vec_size(v) == 2);
+
+    chds_vec_destroy(v);
+    CHDS_ASSERT(v == 0);
 }
 
 static void test_push()
@@ -39,6 +42,7 @@ static void test_push()
     CHDS_ASSERT(chds_vec_size(v) == 3);
 
     chds_vec_destroy(v);
+    CHDS_ASSERT(v == 0);
 }
 
 static void test_pop()
@@ -59,6 +63,7 @@ static void test_pop()
     CHDS_ASSERT(chds_vec_size(v) == 0);
 
     chds_vec_destroy(v);
+    CHDS_ASSERT(v == 0);
 }
 
 static void test_reserve()
@@ -81,6 +86,7 @@ static void test_reserve()
     CHDS_ASSERT(chds_vec_size(v) == 0);
 
     chds_vec_destroy(v);
+    CHDS_ASSERT(v == 0);
 }
 
 static void test_resize()
