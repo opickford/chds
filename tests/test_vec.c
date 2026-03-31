@@ -138,7 +138,9 @@ static void test_null()
     CHDS_ASSERT(chds_vec_capacity(v) == 0);
     CHDS_ASSERT(chds_vec_empty(v));
 
-    chds_vec_clear(v); // Should not throw an error.
+    // Should not throw an error.
+    chds_vec_clear(v); 
+    chds_vec_destroy(v);
 
     // The rest of the functions are tested from null in the other tests.
 }
