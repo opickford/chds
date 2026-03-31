@@ -30,7 +30,13 @@ typedef struct
     size_t capacity;     // Number of elements the chds_vec can store.
 
 } CHDS_VecHeader;
-
+// TODO: Is this naming convention really correct? would CHDS_Vec_Header be better?
+//       not sure. or CHDS_Vec__Header to show it's private? Would like to get this right
+//       The __ shows it's private, but is it the header that's private here or should
+//       it be CHDS__Vec_Header? I don't think so because the Vec isn't private to CHDS.
+//       maybe we should just ignore the private though. We will see what works better 
+//       with CECS.
+//      Note the getter define is chds_vec__header. so should probably match.
 
 // Returns a pointer to the vector's header.
 #define chds_vec__header(v) ((CHDS_VecHeader*)(v) - 1)
@@ -77,6 +83,18 @@ PUBLIC API
     chds_vec__grow_if_needed(&(v), sizeof(*v));                                \
     (v)[chds_vec__header((v))->size++] = (value);                              \
 \
+} while (0)
+
+/**
+* 
+* Removes the last element in the vector.
+* 
+* @param v The vector. Must not be NULL.
+* 
+*/
+#define chds_vec_pop(v) do \
+{ \
+    if (chds_vec__header((v))->size > 0) --chds_vec__header((v))->size; \
 } while (0)
 
 /**
@@ -235,12 +253,12 @@ inline static CHDS_Result chds_vec__grow_if_needed(void** v, size_t element_size
 #define vec_size(v)                 chds_vec_size(v)
 #define vec_capacity(v)             chds_vec_capacity(v)
 #define vec_push(v, value)          chds_vec_push(v, value)
+#define vec_pop(v)                  chds_vec_pop(v)
 #define vec_reserve(v, capacity)    chds_vec_reserve(v, capacity)
 #define vec_resize(v, capacity)     chds_vec_resize(v, capacity)
 #define vec_clear(v)                chds_vec_clear(v)
 #define vec_empty(v)                chds_vec_empty(v)
 
 #endif
-
 
 #endif
