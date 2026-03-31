@@ -1,4 +1,4 @@
-# chds
+# CHDS
 
 A personal C Header-only Data Structures library.
 
