@@ -122,6 +122,21 @@ static void test_clear()
     CHDS_ASSERT(chds_vec_capacity(v) > 0);
 }
 
+static void test_null()
+{
+    // Define null vector.
+    CHDS_Vec(int) v = 0;
+
+    // Test the defined behaviour for a null vector.
+    CHDS_ASSERT(chds_vec_size(v) == 0);
+    CHDS_ASSERT(chds_vec_capacity(v) == 0);
+    CHDS_ASSERT(chds_vec_empty(v));
+
+    chds_vec_clear(v); // Should not throw an error.
+
+    // The rest of the functions are tested from null in the other tests.
+}
+
 int main()
 {
     test_size();
@@ -131,6 +146,7 @@ int main()
     test_reserve();
     test_resize();
     test_clear();
+    test_null();
 
     return 0;
 }
